@@ -1,7 +1,8 @@
 # Broiler - Boilerplate installer
 
-## Purpose
-With all the different starter kits out there to start a project (such as react-redux-starter, etc), it becomes a bit of a pain to not only remember where these repos are when you need to start a new project, but also the steps required to get it up and running. Broiler is an attempt to make this a bit easier. You can save several different repos for several different starters (or boilerplates) and install them and have them ready to go with just a couple of keystrokes.
+Broiler is a general cli (not specific to any framework) to make getting off the ground with all types of projects a bit easier. 
+
+With all the different starter kits out there to start a project (such as react-redux-starter, etc), it becomes a bit of a pain to not only remember where these repos are when you need to start a new project, but also the steps required to get it up and running. You can save several different repos for several different starters (or boilerplates) and install them and have them ready to go with just a couple of keystrokes.
 
 ## Install
 `npm install -g broiler`
