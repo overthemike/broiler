@@ -1,6 +1,6 @@
 # Broiler - Boilerplate installer
 
-Broiler is a small cli to make getting off the ground with projects a bit easier. 
+Broiler is a small cli tool to make getting off the ground with projects a bit easier. 
 
 With all the different starter kits out there to start a project (such as react-redux-starter, etc), it becomes a bit of a pain to not only remember where these repos are when you need to start a new project, but also the steps required to get it up and running. You can save several different repos for several different starters (or boilerplates) and install them and have them ready to go with just a couple of keystrokes.
 
