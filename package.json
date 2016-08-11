@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "broiler",
   "version": "1.1.1",
   "description": "",
   "main": "bin/broiler.js",
@@ -34,12 +34,5 @@
     "validate-npm-package-name": "^2.2.2",
     "yargs": "^4.8.1"
   },
-  "tonicExampleFilename": "example/example.js",
-  "boilerplate": {
-    "name": "example",
-    "version": "1.0.0",
-    "description": "",
-    "author": "",
-    "license": "ISC"
-  }
+  "tonicExampleFilename": "example.js"
 }
