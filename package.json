@@ -34,7 +34,7 @@
     "validate-npm-package-name": "^2.2.2",
     "yargs": "^4.8.1"
   },
-  "tonicExampleFilename": "example.js",
+  "tonicExampleFilename": "example/example.js",
   "boilerplate": {
     "name": "example",
     "version": "1.0.0",
