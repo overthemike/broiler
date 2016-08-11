@@ -6,6 +6,9 @@ module.exports = {
   error: function(msg) {
     return Array.isArray(msg) ? msg.join(chalk.red("\n>> Oops! ")) : chalk.red(">> Oops! ") + msg;
   },
+  generr: function(msg){
+    return Array.isArray(msg) ? msg.join(chalk.red("\nOops! ")) : chalk.red("Oops! ") + msg;
+  },
   notify: function (msg) {
     return Array.isArray(msg) ? msg.join(chalk.cyan("\n>> ")) : chalk.cyan(">> ") + msg;
   },
