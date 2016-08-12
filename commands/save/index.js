@@ -30,6 +30,8 @@ module.exports = function save(name, repo, cb) {
     jsonfile.writeFileSync(conf.config, repos, {spaces:2});
     
     console.log(notify('Saved!'));
-    cb();
+    if (cb && typeof cb === 'function') {
+      cb();  
+    }
   });
 }

@@ -127,7 +127,9 @@ module.exports = function(repo, location, cb) {
           npmspinner.stop(true);
           console.log(notify("Installed NPM Modules"));
           console.log(notify("All done!"));
-          cb();
+          if (cb && typeof cb === 'function') {
+            cb();
+          }
         });
       });
     }); 
