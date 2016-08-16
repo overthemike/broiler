@@ -64,12 +64,6 @@ yargs
 
 .argv
 
-module.exports = {
-  install: bluebird.promisify(install),
-  save: bluebird.promisify(save)
-}
-
-
 // catch errors here
 process.on('uncaughtException', function(err){
   console.log(error(err));

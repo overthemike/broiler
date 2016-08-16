@@ -1,4 +1,6 @@
+var bluebird = require('bluebird');
+
 module.exports = {
-  install: require('./commands/install'),
-  save: require('./commands/save')
+  install: bluebird.promisify(install),
+  save: bluebird.promisify(save)
 }
