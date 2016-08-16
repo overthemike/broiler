@@ -29,12 +29,16 @@ yargs
 .command(
   'save', 
   'broiler save <name> <repo>',
-  save
+  function (yargs) {
+    save()
+  }
 )
 .command(
   's', 
   'alias for save',
-  save
+  function (yargs) {
+    save()
+  }
 )
 
 // errors

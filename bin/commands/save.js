@@ -20,12 +20,12 @@ var _jsonfile2 = _interopRequireDefault(_jsonfile);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function save(name, repo, cb) {
-  (0, _git.checkGit)();
-
   var conf = (0, _rc2.default)('broil', {});
 
   name = name || conf._[1];
   repo = repo || conf._[2];
+
+  (0, _git.checkGit)();
 
   if (!conf.config) {
     // .broilrc doesn't exist, let's create it in their home directory
@@ -36,12 +36,12 @@ function save(name, repo, cb) {
   }
 
   (0, _git.validateGitRepo)(repo, function () {
-    var newObj = { repos: {} };
-    newObj.repos[name] = repo;
+    var newObj = {};
+    newObj[name] = repo;
 
-    var repos = Object.assign(_jsonfile2.default.readFileSync(conf.config), newObj);
+    var repos = Object.assign(_jsonfile2.default.readFileSync(conf.config).repos, newObj);
 
-    _jsonfile2.default.writeFileSync(conf.config, repos, { spaces: 2 });
+    _jsonfile2.default.writeFileSync(conf.config, { repos: repos }, { spaces: 2 });
 
     console.log((0, _utils.notify)('Saved!'));
     if (cb && typeof cb === 'function') {

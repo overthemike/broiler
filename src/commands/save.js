@@ -4,12 +4,12 @@ import { checkGit, validateGitRepo } from '../utils/git'
 import jsonfile from 'jsonfile'
 
 export default function save (name, repo, cb) {
-  checkGit()
-
-  const conf = rc('broil', {})
+  let conf = rc('broil', {})
 
   name = name || conf._[1]
-  repo = repo || conf._[2]
+  repo = repo || conf._[2] 
+
+  checkGit()
 
   if (!conf.config) {
     // .broilrc doesn't exist, let's create it in their home directory
@@ -20,12 +20,12 @@ export default function save (name, repo, cb) {
   }
 
   validateGitRepo(repo, () => {
-    let newObj = {repos:{}}
-    newObj.repos[name] = repo
+    let newObj = {}
+    newObj[name] = repo
   
-    let repos = Object.assign(jsonfile.readFileSync(conf.config), newObj)
+    let repos = Object.assign(jsonfile.readFileSync(conf.config).repos, newObj)
 
-    jsonfile.writeFileSync(conf.config, repos, {spaces:2})
+    jsonfile.writeFileSync(conf.config, {repos}, {spaces:2})
 
     console.log(notify('Saved!'))
     if (cb && typeof cb === 'function') {

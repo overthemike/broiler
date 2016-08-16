@@ -38,7 +38,11 @@ function (yargs) {
 })
 
 // Save command
-.command('save', 'broiler save <name> <repo>', _save2.default).command('s', 'alias for save', _save2.default)
+.command('save', 'broiler save <name> <repo>', function (yargs) {
+  (0, _save2.default)();
+}).command('s', 'alias for save', function (yargs) {
+  (0, _save2.default)();
+})
 
 // errors
 .fail(function (msg, err) {
