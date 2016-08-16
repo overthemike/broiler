@@ -17,7 +17,7 @@
   "homepage": "https://github.com/overthemike/broiler#readme",
   "preferGlobal": true,
   "bin": {
-    "broiler": "node ./bin/broiler.js"
+    "broiler": "node ./bin/broiler"
   },
   "repository": {
     "type": "git",
