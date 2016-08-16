@@ -18,11 +18,13 @@ var fs = require('fs');
 
 module.exports = function(repo, location, cb) {
   location = location ? process.cwd() + '/' + location : process.cwd();
-  
+  var isNewDir = false;
+
   // check if location exists...if it doesn't, create it
   try {
     fs.statSync(location);
   } catch (err) {
+    isNewDir = true;
     fs.mkdirSync(location);
   }
 
@@ -91,7 +93,7 @@ module.exports = function(repo, location, cb) {
         console.log(notify("Cloned into " + location + "..."));
 
         // preserve props to new boilerplate object
-        var packageJson = jsonfile.readFileSync('package.json');
+        var packageJson = jsonfile.readFileSync(location + '/package.json');
         packageJson.boilerplate = {
           name: packageJson.name,
           version: packageJson.version,
@@ -115,8 +117,8 @@ module.exports = function(repo, location, cb) {
         packageJson.author = answers.author;
         packageJson.license = answers.license;
 
-        rm('package.json');
-        jsonfile.writeFileSync('package.json', packageJson, {spaces:2});
+        rm(location + '/package.json');
+        jsonfile.writeFileSync(location + '/package.json', packageJson, {spaces:2});
 
         exec('cd ' + location + ' && rm -rf .git', {silent:true});
         console.log(notify("Removed boilerplate's .git directory..."));
