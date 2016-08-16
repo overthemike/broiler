@@ -8,10 +8,12 @@ With all the different starter kits out there to start a project (such as react-
 `npm install -g broiler`
 
 ## Usage
-You can point to any git directory you'd like and ask broiler to bring it down and install it for you. It makes some modifications to the package.json file (such as the name and description of your application) but preserves the original data in the package.json under the 'boilerplate' key.
+You can point to any git directory you'd like and ask broiler to bring it down and install it for you. It will clone the repo down for you, remove the old git reference and install the necessary npm modules. 
+
+Broiler will modify the package.json file (such as the name and description of your application) but preserves the original data in the package.json under the 'boilerplate' key.
 
 Install from a git repository:
-`broiler install [path to git repo]`
+`broiler install <path to git repo> [<location>]`
 
 You can also save repos under a more friendly alias to use again later. Doing so will create a `.broilrc` file in your home directory to store this info.
 
@@ -19,4 +21,13 @@ You can also save repos under a more friendly alias to use again later. Doing so
 
 will allow this type of install:
 
-`broiler install [alias]`
+`broiler install [alias] [<location>]`
+
+The info is saved as json and looks like this:
+
+.broilrc
+    {
+        "repos": {
+            "<alias>":"<path to github repo>"
+        }
+    }

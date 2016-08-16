@@ -12,16 +12,16 @@ yargs
 // Install command
 .command(
   "install", // command
-  'broiler install <repo>', // description
+  'broiler install <repo> [<location>]', // description
   function (yargs) {
-    install(yargs.argv._[1]);
+    install(yargs.argv._[1], yargs.argv._[2]);
   }
 )
 .command(
   "i", 
   'alias for install',
   function (yargs) {
-    install(yargs.argv._[1])
+    install(yargs.argv._[1], yargs.argv._[2])
   }
 )
 
