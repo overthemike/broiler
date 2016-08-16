@@ -1,9 +1,9 @@
-var yargs = require('yargs');
-var install = require('../install');
-var save = require('../save');
-var error = require('../../utils').error;
-var didyoumean = require('didyoumean');
-var bluebird = require('bluebird');
+import yargs from 'yargs'
+import install from './install'
+import save from './save'
+import { error } from '../utils'
+import didyoumean from 'didyoumean'
+import bluebird from 'bluebird'
 
 yargs
 // Display version from package.json
@@ -11,14 +11,14 @@ yargs
 
 // Install command
 .command(
-  "install", // command
+  'install', // command
   'broiler install <repo> [<location>]', // description
   function (yargs) {
     install(yargs.argv._[1], yargs.argv._[2]);
   }
 )
 .command(
-  "i", 
+  'i', 
   'alias for install',
   function (yargs) {
     install(yargs.argv._[1], yargs.argv._[2])
@@ -27,12 +27,12 @@ yargs
 
 // Save command
 .command(
-  "save", 
+  'save', 
   'broiler save <name> <repo>',
   save
 )
 .command(
-  "s", 
+  's', 
   'alias for save',
   save
 )
@@ -40,15 +40,15 @@ yargs
 // errors
 .fail(function(msg, err){
   if (/Unknown argument/.test(msg)){
-    var list = ['install', 'save'];
-    var command = msg.split(": ")[1].split(", ")[0];
-    var possible = didyoumean(command, list);
+    let list = ['install', 'save'];
+    let command = msg.split(": ")[1].split(", ")[0];
+    let possible = didyoumean(command, list);
     if (possible) {
       yargs.showHelp();
-      console.log(error("Did you mean 'broiler " + possible + "'?"));
+      console.log(error(`Did you mean 'broiler ${possible}'?`));
     } else {
       yargs.showHelp();
-      console.log(error("'" + command + "' is not a command that broiler understands"));
+      console.log(error(`'${command}' is not a command that broiler understands`));
     }
   }
   process.exit(1)
