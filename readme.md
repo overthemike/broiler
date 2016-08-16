@@ -25,7 +25,6 @@ will allow this type of install:
 
 The info is saved as json and looks like this:
 
-.broilrc
 ```json
 {
     "repos": {
