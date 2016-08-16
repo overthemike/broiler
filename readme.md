@@ -26,8 +26,10 @@ will allow this type of install:
 The info is saved as json and looks like this:
 
 .broilrc
-```json{
+```json
+{
     "repos": {
         "alias":"git@github.com:path/to/github/repo.git"
     }
-}```
+}
+```
