@@ -1,11 +1,11 @@
 {
   "name": "broiler",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "",
   "main": "bin/broiler.js",
   "scripts": {
     "build": "cd bin && rm -rf * && cd .. && babel ./src -d ./bin && mv ./bin/broiler.js ./bin/broiler",
-    "prepublish":"npm run build"
+    "prepublish": "npm run build"
   },
   "keywords": [
     "boilerplate"
