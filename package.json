@@ -4,7 +4,8 @@
   "description": "",
   "main": "bin/broiler.js",
   "scripts": {
-    "build": "cd bin && rm -rf * && cd .. && babel ./src -d ./bin && mv ./bin/broiler.js ./bin/broiler"
+    "build": "cd bin && rm -rf * && cd .. && babel ./src -d ./bin && mv ./bin/broiler.js ./bin/broiler",
+    "prepublish":"npm run build"
   },
   "keywords": [
     "boilerplate"
