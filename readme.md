@@ -17,11 +17,11 @@ Install from a git repository:
 
 You can also save repos under a more friendly alias to use again later. Doing so will create a `.broilrc` file in your home directory to store this info.
 
-`broiler save [alias] [path to git repo]`
+`broiler save <alias> <path to git repo>`
 
 will allow this type of install:
 
-`broiler install [alias] [<location>]`
+`broiler install <alias> [<location>]`
 
 The info is saved as json and looks like this:
 
