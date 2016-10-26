@@ -132,7 +132,7 @@ exports.default = function (repo) {
             }
           });
         } else {
-          exect('cd ' + location + ' && yarn', { slient: true }, function () {
+          (0, _shelljs.exec)('cd ' + location + ' && yarn', { slient: true }, function () {
             npmSpinner.stop(true);
             console.log((0, _utils.notify)('Installed NPM Modules.'));
             console.log((0, _utils.notify)('All done!'));
