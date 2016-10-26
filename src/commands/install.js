@@ -133,15 +133,27 @@ export default function (repo, location = currentDir, cb) {
         npmSpinner.setSpinnerString(19)
         npmSpinner.start()
 
-        exec(`cd ${location} && npm install`, { silent: true }, () => {
-          npmSpinner.stop(true)
-          console.log(notify('Installed NPM Modules.'))
-          console.log(notify('All done!'))
+        if (!which(yarn)) {
+          exec(`cd ${location} && npm install`, { silent: true }, () => {
+            npmSpinner.stop(true)
+            console.log(notify('Installed NPM Modules.'))
+            console.log(notify('All done!'))
 
-          if (cb && typeof cb === 'function') {
-            cb()
-          }
-        })
+            if (cb && typeof cb === 'function') {
+              cb()
+            }
+          })
+        } else {
+          exect(`cd ${location} && yarn`, { slient: true }, () => {
+            npmSpinner.stop(true)
+            console.log(notify('Installed NPM Modules.'))
+            console.log(notify('All done!'))
+
+            if (cb && typeof cb === 'function') {
+              cb()
+            }
+          })
+        }
       })
     })
   })
