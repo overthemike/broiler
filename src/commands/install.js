@@ -144,7 +144,7 @@ export default function (repo, location = currentDir, cb) {
             }
           })
         } else {
-          exect(`cd ${location} && yarn`, { slient: true }, () => {
+          exec(`cd ${location} && yarn`, { slient: true }, () => {
             npmSpinner.stop(true)
             console.log(notify('Installed NPM Modules.'))
             console.log(notify('All done!'))

@@ -121,7 +121,7 @@ exports.default = function (repo) {
         npmSpinner.setSpinnerString(19);
         npmSpinner.start();
 
-        if (!(0, _shelljs.which)(yarn)) {
+        if (!(0, _shelljs.which)('yarn')) {
           (0, _shelljs.exec)('cd ' + location + ' && npm install', { silent: true }, function () {
             npmSpinner.stop(true);
             console.log((0, _utils.notify)('Installed NPM Modules.'));
