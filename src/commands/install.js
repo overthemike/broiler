@@ -11,6 +11,7 @@ import extfs from 'extfs'
 import fs from 'fs'
 
 const currentDir = process.cwd()
+const yarn = !!which('yarn')
 
 export default function (repo, location = currentDir, cb) {
   if (location !== currentDir) {
@@ -129,11 +130,11 @@ export default function (repo, location = currentDir, cb) {
         console.log(notify('Removed boilerplate .git directory'))
 
         // install npm modules
-        let npmSpinner = new Spinner(notify('%s \u2615  - Installing NPM Modules...'))
+        let npmSpinner = new Spinner(notify(`%s \u2615  - Installing NPM Modules...${yarn && '(yarn)'}`))
         npmSpinner.setSpinnerString(19)
         npmSpinner.start()
 
-        if (!which('yarn')) {
+        if (!yarn) {
           exec(`cd ${location} && npm install`, { silent: true }, () => {
             npmSpinner.stop(true)
             console.log(notify('Installed NPM Modules.'))
