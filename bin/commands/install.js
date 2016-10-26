@@ -121,15 +121,27 @@ exports.default = function (repo) {
         npmSpinner.setSpinnerString(19);
         npmSpinner.start();
 
-        (0, _shelljs.exec)('cd ' + location + ' && npm install', { silent: true }, function () {
-          npmSpinner.stop(true);
-          console.log((0, _utils.notify)('Installed NPM Modules.'));
-          console.log((0, _utils.notify)('All done!'));
+        if (!which(yarn)) {
+          (0, _shelljs.exec)('cd ' + location + ' && npm install', { silent: true }, function () {
+            npmSpinner.stop(true);
+            console.log((0, _utils.notify)('Installed NPM Modules.'));
+            console.log((0, _utils.notify)('All done!'));
 
-          if (cb && typeof cb === 'function') {
-            cb();
-          }
-        });
+            if (cb && typeof cb === 'function') {
+              cb();
+            }
+          });
+        } else {
+          exect('cd ' + location + ' && yarn', { slient: true }, function () {
+            npmSpinner.stop(true);
+            console.log((0, _utils.notify)('Installed NPM Modules.'));
+            console.log((0, _utils.notify)('All done!'));
+
+            if (cb && typeof cb === 'function') {
+              cb();
+            }
+          });
+        }
       });
     });
   });

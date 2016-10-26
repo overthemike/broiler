@@ -1,4 +1,4 @@
-import { exec, rm } from 'shelljs'
+import { which, exec, rm } from 'shelljs'
 import { error, notify } from '../utils'
 import semver from 'semver'
 import validateNpmPackageName from 'validate-npm-package-name'
