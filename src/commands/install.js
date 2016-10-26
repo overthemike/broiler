@@ -133,7 +133,7 @@ export default function (repo, location = currentDir, cb) {
         npmSpinner.setSpinnerString(19)
         npmSpinner.start()
 
-        if (!which(yarn)) {
+        if (!which('yarn')) {
           exec(`cd ${location} && npm install`, { silent: true }, () => {
             npmSpinner.stop(true)
             console.log(notify('Installed NPM Modules.'))
