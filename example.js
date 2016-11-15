@@ -1,4 +1,6 @@
-var broiler = require('broiler');
+var broiler = require('./');
+
+console.log(broiler)
 
 broiler.save('react-redux', 'git@github.com:davezuko/react-redux-starter-kit.git')
 .then(function(){

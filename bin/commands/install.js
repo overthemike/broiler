@@ -117,11 +117,11 @@ exports.default = function (repo) {
         console.log((0, _utils.notify)('Removed boilerplate .git directory'));
 
         // install npm modules
-        var npmSpinner = new _cliSpinner.Spinner((0, _utils.notify)('%s ☕  - Installing NPM Modules...'));
+        var npmSpinner = new _cliSpinner.Spinner((0, _utils.notify)('%s ☕  - Installing NPM Modules...' + (yarn && '(yarn)')));
         npmSpinner.setSpinnerString(19);
         npmSpinner.start();
 
-        if (!(0, _shelljs.which)('yarn')) {
+        if (!yarn) {
           (0, _shelljs.exec)('cd ' + location + ' && npm install', { silent: true }, function () {
             npmSpinner.stop(true);
             console.log((0, _utils.notify)('Installed NPM Modules.'));
@@ -186,3 +186,4 @@ var _fs2 = _interopRequireDefault(_fs);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var currentDir = process.cwd();
+var yarn = !!(0, _shelljs.which)('yarn');
