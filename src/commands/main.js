@@ -14,14 +14,14 @@ yargs
   'install', // command
   'broiler install <repo> [<location>]', // description
   function (yargs) {
-    install(null, yargs.argv._[1], yargs.argv._[2]);
+    install(yargs.argv._[1], yargs.argv._[2]);
   }
 )
 .command(
   'i', 
   'alias for install',
   function (yargs) {
-    install(null, yargs.argv._[1], yargs.argv._[2])
+    install(yargs.argv._[1], yargs.argv._[2])
   }
 )
 

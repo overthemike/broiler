@@ -1,19 +1,18 @@
-import { which, exec, rm } from 'shelljs'
-import { error, notify } from '../utils'
+import { exec, rm } from 'shelljs'
+import { error, notify, getPackageJsonLocations, install } from '../utils'
 import semver from 'semver'
 import validateNpmPackageName from 'validate-npm-package-name'
 import validateLicense from 'validate-npm-package-license'
-import { Spinner } from 'cli-spinner'
 import inquirer from 'inquirer'
 import { checkGit, getRepo, validateGitRepo } from '../utils/git'
 import jsonfile from 'jsonfile'
 import extfs from 'extfs'
 import fs from 'fs'
+import { Spinner } from 'cli-spinner'
 
 const currentDir = process.cwd()
-const yarn = !!which('yarn')
 
-export default function (repo, location = currentDir, cb) {
+export default function (repo, location = currentDir) {
   if (location !== currentDir) {
     location = `${currentDir}/${location}`
   }
@@ -33,7 +32,7 @@ export default function (repo, location = currentDir, cb) {
   }
 
   checkGit() // make sure git is installed
-
+  
   repo = getRepo(repo)
 
   validateGitRepo(repo, function(){
@@ -96,7 +95,7 @@ export default function (repo, location = currentDir, cb) {
         cloneSpinner.stop(true)
         console.log(notify(`Cloned into ${location}`))
 
-        // do package.json meddling
+        // do main package.json meddling
         let packageJson = jsonfile.readFileSync(`${location}/package.json`)
 
         packageJson.boilerplate = {
@@ -130,31 +129,9 @@ export default function (repo, location = currentDir, cb) {
         console.log(notify('Removed boilerplate .git directory'))
 
         // install npm modules
-        let npmSpinner = new Spinner(notify(`%s \u2615  - Installing NPM Modules...${yarn && '(yarn)'}`))
-        npmSpinner.setSpinnerString(19)
-        npmSpinner.start()
-
-        if (!yarn) {
-          exec(`cd ${location} && npm install`, { silent: true }, () => {
-            npmSpinner.stop(true)
-            console.log(notify('Installed NPM Modules.'))
-            console.log(notify('All done!'))
-
-            if (cb && typeof cb === 'function') {
-              cb()
-            }
-          })
-        } else {
-          exec(`cd ${location} && yarn`, { silent: true }, () => {
-            npmSpinner.stop(true)
-            console.log(notify('Installed NPM Modules.'))
-            console.log(notify('All done!'))
-
-            if (cb && typeof cb === 'function') {
-              cb()
-            }
-          })
-        }
+        getPackageJsonLocations(process.cwd())
+          .map(install)
+        
       })
     })
   })

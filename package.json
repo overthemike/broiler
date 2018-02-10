@@ -1,6 +1,6 @@
 {
   "name": "broiler",
-  "version": "1.5.5",
+  "version": "2.0.1",
   "description": "",
   "main": "bin/broiler.js",
   "scripts": {
@@ -10,8 +10,12 @@
   "keywords": [
     "boilerplate"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "email": "jfmike@gmail.com",
+    "name": "Michael Sweeney",
+    "url": "http://github.com/overthemike"
+  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/overthemike/broiler/issues"
   },

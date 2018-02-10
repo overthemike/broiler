@@ -37,7 +37,7 @@ function getRepo(repo) {
 
       if (possible) {
         // it's not a match, but it's close to one already entered in .broilrc
-        throw new Error((0, _.error)('Did you mean \'' + possible + '\'?'));
+        throw new Error('Did you mean \'' + possible + '\'?');
       } else {
         // it doesn't match nor is it close, might be a git url
         return repo;

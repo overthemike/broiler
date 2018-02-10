@@ -5,8 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (repo) {
-  var location = arguments.length <= 1 || arguments[1] === undefined ? currentDir : arguments[1];
-  var cb = arguments[2];
+  var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : currentDir;
 
   if (location !== currentDir) {
     location = currentDir + '/' + location;
@@ -83,7 +82,7 @@ exports.default = function (repo) {
         cloneSpinner.stop(true);
         console.log((0, _utils.notify)('Cloned into ' + location));
 
-        // do package.json meddling
+        // do main package.json meddling
         var packageJson = _jsonfile2.default.readFileSync(location + '/package.json');
 
         packageJson.boilerplate = {
@@ -117,31 +116,7 @@ exports.default = function (repo) {
         console.log((0, _utils.notify)('Removed boilerplate .git directory'));
 
         // install npm modules
-        var npmSpinner = new _cliSpinner.Spinner((0, _utils.notify)('%s ☕  - Installing NPM Modules...' + (yarn && '(yarn)')));
-        npmSpinner.setSpinnerString(19);
-        npmSpinner.start();
-
-        if (!yarn) {
-          (0, _shelljs.exec)('cd ' + location + ' && npm install', { silent: true }, function () {
-            npmSpinner.stop(true);
-            console.log((0, _utils.notify)('Installed NPM Modules.'));
-            console.log((0, _utils.notify)('All done!'));
-
-            if (cb && typeof cb === 'function') {
-              cb();
-            }
-          });
-        } else {
-          (0, _shelljs.exec)('cd ' + location + ' && yarn', { silent: true }, function () {
-            npmSpinner.stop(true);
-            console.log((0, _utils.notify)('Installed NPM Modules.'));
-            console.log((0, _utils.notify)('All done!'));
-
-            if (cb && typeof cb === 'function') {
-              cb();
-            }
-          });
-        }
+        (0, _utils.getPackageJsonLocations)(process.cwd()).map(_utils.install);
       });
     });
   });
@@ -163,8 +138,6 @@ var _validateNpmPackageLicense = require('validate-npm-package-license');
 
 var _validateNpmPackageLicense2 = _interopRequireDefault(_validateNpmPackageLicense);
 
-var _cliSpinner = require('cli-spinner');
-
 var _inquirer = require('inquirer');
 
 var _inquirer2 = _interopRequireDefault(_inquirer);
@@ -183,7 +156,8 @@ var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
 
+var _cliSpinner = require('cli-spinner');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var currentDir = process.cwd();
-var yarn = !!(0, _shelljs.which)('yarn');
