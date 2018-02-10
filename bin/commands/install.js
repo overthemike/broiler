@@ -116,7 +116,7 @@ exports.default = function (repo) {
         console.log((0, _utils.notify)('Removed boilerplate .git directory'));
 
         // install npm modules
-        (0, _utils.getPackageJsonLocations)(process.cwd()).map(_utils.install);
+        (0, _utils.getPackageJsonLocations)(location).map(_utils.install);
       });
     });
   });

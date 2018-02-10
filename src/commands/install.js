@@ -129,7 +129,7 @@ export default function (repo, location = currentDir) {
         console.log(notify('Removed boilerplate .git directory'))
 
         // install npm modules
-        getPackageJsonLocations(process.cwd())
+        getPackageJsonLocations(location)
           .map(install)
         
       })
