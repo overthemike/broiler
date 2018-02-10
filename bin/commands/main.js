@@ -32,9 +32,9 @@ _yargs2.default
 .command('install', // command
 'broiler install <repo> [<location>]', // description
 function (yargs) {
-  (0, _install2.default)(null, yargs.argv._[1], yargs.argv._[2]);
+  (0, _install2.default)(yargs.argv._[1], yargs.argv._[2]);
 }).command('i', 'alias for install', function (yargs) {
-  (0, _install2.default)(null, yargs.argv._[1], yargs.argv._[2]);
+  (0, _install2.default)(yargs.argv._[1], yargs.argv._[2]);
 })
 
 // Save command

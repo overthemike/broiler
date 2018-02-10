@@ -10,8 +10,12 @@
   "keywords": [
     "boilerplate"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "email": "jfmike@gmail.com",
+    "name": "Michael Sweeney",
+    "url": "http://github.com/overthemike"
+  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/overthemike/broiler/issues"
   },
