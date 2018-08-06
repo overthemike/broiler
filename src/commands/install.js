@@ -9,6 +9,7 @@ import jsonfile from 'jsonfile'
 import extfs from 'extfs'
 import fs from 'fs'
 import { Spinner } from 'cli-spinner'
+import shellescape from 'shellescape'
 
 const currentDir = process.cwd()
 
@@ -91,12 +92,12 @@ export default function (repo, location = currentDir) {
       cloneSpinner.setSpinnerString(19)
       cloneSpinner.start()
 
-      exec(`git clone ${repo} ${location}`, { silent: true }, () => {
+      exec(`git clone ${repo} ${shellescape(location)}`, { silent: true }, () => {
         cloneSpinner.stop(true)
         console.log(notify(`Cloned into ${location}`))
 
         // do main package.json meddling
-        let packageJson = jsonfile.readFileSync(`${location}/package.json`)
+        let packageJson = jsonfile.readFileSync(`${shellescape(location)}/package.json`)
 
         packageJson.boilerplate = {
           name: packageJson.name,
@@ -125,7 +126,7 @@ export default function (repo, location = currentDir) {
         jsonfile.writeFileSync(`${location}/package.json`, packageJson, { spaces: 2 })
       
         // remove old git repo
-        exec(`cd ${location} && rm -rf .git`, { silent: true })
+        exec(`cd ${shellescape(location)} && rm -rf .git`, { silent: true })
         console.log(notify('Removed boilerplate .git directory'))
 
         // install npm modules
