@@ -11,6 +11,8 @@ exports.default = function (repo) {
     location = currentDir + '/' + location;
   }
 
+  location = location;
+
   var isNewDir = false;
 
   // check if location exists; if not, create it
@@ -78,12 +80,12 @@ exports.default = function (repo) {
       cloneSpinner.setSpinnerString(19);
       cloneSpinner.start();
 
-      (0, _shelljs.exec)('git clone ' + repo + ' ' + escape(location), { silent: true }, function () {
+      (0, _shelljs.exec)('git clone ' + repo + ' ' + replacespace(location), { silent: true }, function () {
         cloneSpinner.stop(true);
         console.log((0, _utils.notify)('Cloned into ' + location));
 
         // do main package.json meddling
-        var packageJson = _jsonfile2.default.readFileSync(escape(location) + '/package.json');
+        var packageJson = _jsonfile2.default.readFileSync(location + '/package.json');
 
         packageJson.boilerplate = {
           name: packageJson.name,
@@ -112,11 +114,11 @@ exports.default = function (repo) {
         _jsonfile2.default.writeFileSync(location + '/package.json', packageJson, { spaces: 2 });
 
         // remove old git repo
-        (0, _shelljs.exec)('cd ' + escape(location) + ' && rm -rf .git', { silent: true });
+        (0, _shelljs.exec)('cd ' + replacespace(location) + ' && rm -rf .git', { silent: true });
         console.log((0, _utils.notify)('Removed boilerplate .git directory'));
 
         // install npm modules
-        (0, _utils.getPackageJsonLocations)(escape(location)).map(_utils.install);
+        (0, _utils.getPackageJsonLocations)(location).map(_utils.install);
       });
     });
   });
@@ -158,18 +160,10 @@ var _fs2 = _interopRequireDefault(_fs);
 
 var _cliSpinner = require('cli-spinner');
 
-var _shellEscape = require('shell-escape');
-
-var _shellEscape2 = _interopRequireDefault(_shellEscape);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var currentDir = process.cwd();
 
-function escape(item) {
-  if (Array.isArray(item)) {
-    return (0, _shellEscape2.default)(item);
-  } else {
-    return (0, _shellEscape2.default)([item]);
-  }
+function replacespace(item) {
+  return item.replace(/(\s+)/g, "\\$1");
 }

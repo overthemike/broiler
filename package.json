@@ -38,7 +38,6 @@
     "jsonfile": "^2.2.3",
     "rc": "^1.1.6",
     "semver": "^5.1.0",
-    "shell-escape": "^0.2.0",
     "shelljs": "^0.6.0",
     "validate-npm-package-license": "^3.0.1",
     "validate-npm-package-name": "^2.2.2",
