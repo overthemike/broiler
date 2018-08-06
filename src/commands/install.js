@@ -9,9 +9,17 @@ import jsonfile from 'jsonfile'
 import extfs from 'extfs'
 import fs from 'fs'
 import { Spinner } from 'cli-spinner'
-import shellescape from 'shellescape'
+import shellescape from 'shell-escape'
 
 const currentDir = process.cwd()
+
+function escape(item) {
+  if (Array.isArray(item)) {
+    return shellescape(item)
+  } else {
+    return shellescape([item])
+  }
+}
 
 export default function (repo, location = currentDir) {
   if (location !== currentDir) {
@@ -92,12 +100,12 @@ export default function (repo, location = currentDir) {
       cloneSpinner.setSpinnerString(19)
       cloneSpinner.start()
 
-      exec(`git clone ${repo} ${shellescape(location)}`, { silent: true }, () => {
+      exec(`git clone ${repo} ${escape(location)}`, { silent: true }, () => {
         cloneSpinner.stop(true)
         console.log(notify(`Cloned into ${location}`))
 
         // do main package.json meddling
-        let packageJson = jsonfile.readFileSync(`${shellescape(location)}/package.json`)
+        let packageJson = jsonfile.readFileSync(`${escape(location)}/package.json`)
 
         packageJson.boilerplate = {
           name: packageJson.name,
@@ -126,11 +134,11 @@ export default function (repo, location = currentDir) {
         jsonfile.writeFileSync(`${location}/package.json`, packageJson, { spaces: 2 })
       
         // remove old git repo
-        exec(`cd ${shellescape(location)} && rm -rf .git`, { silent: true })
+        exec(`cd ${escape(location)} && rm -rf .git`, { silent: true })
         console.log(notify('Removed boilerplate .git directory'))
 
         // install npm modules
-        getPackageJsonLocations(location)
+        getPackageJsonLocations(escape(location))
           .map(install)
         
       })

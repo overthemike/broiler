@@ -70,6 +70,7 @@ yargs
 
 // catch errors here
 process.on('uncaughtException', function(err){
+  console.log(err)
   console.log(error(err));
   process.exit(1);
 })

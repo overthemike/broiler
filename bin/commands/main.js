@@ -69,6 +69,7 @@ function (yargs) {
 
 // catch errors here
 process.on('uncaughtException', function (err) {
+  console.log(err);
   console.log((0, _utils.error)(err));
   process.exit(1);
 });
