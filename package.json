@@ -35,7 +35,7 @@
     "didyoumean": "^1.2.1",
     "extfs": "0.0.7",
     "inquirer": "^6.3.1",
-    "jsonfile": "^2.2.3",
+    "jsonfile": "^5.0.0",
     "rc": "^1.1.6",
     "semver": "^6.1.1",
     "shelljs": "^0.8.3",
