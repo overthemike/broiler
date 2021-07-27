@@ -29,23 +29,26 @@ _yargs2.default
 .version()
 
 // Install command
-.command('install', // command
-'broiler install <repo> [<location>]', // description
-function (yargs) {
-  (0, _install2.default)(yargs.argv._[1], yargs.argv._[2]);
-}).command('i', 'alias for install', function (yargs) {
-  (0, _install2.default)(yargs.argv._[1], yargs.argv._[2]);
+.command('install <repo> [location]', // command
+'Install a boilerplate', // description
+function (_ref) {
+  var repo = _ref.repo,
+      location = _ref.location;
+
+  (0, _install2.default)(repo, location);
 })
 
 // Save command
-.command('save', 'broiler save <name> <repo>', function (yargs) {
-  (0, _save2.default)();
-}).command('s', 'alias for save', function (yargs) {
-  (0, _save2.default)();
+.command('save <name> <repo>', 'Save a boilerplate as an alias to use later', function (_ref2) {
+  var name = _ref2.name,
+      repo = _ref2.repo;
+
+  (0, _save2.default)(name, repo);
 })
 
 // errors
 .fail(function (msg, err) {
+  console.log('\n', msg, err);
   if (/Unknown argument/.test(msg)) {
     var list = ['install', 'save'];
     var command = msg.split(": ")[1].split(", ")[0];

@@ -61,6 +61,7 @@ function validateGitRepo(repo, cb) {
   spinner.setSpinnerString(19);
   spinner.start();
   (0, _shelljs.exec)('git ls-remote ' + repo, { silent: true }, function (code) {
+    console.log('code', code);
     spinner.stop(true);
     if (code !== 0) {
       // invalid repo - https://git-scm.com/docs/git-ls-remote.html (--exit-code)

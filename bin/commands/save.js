@@ -22,9 +22,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function save(name, repo, cb) {
   var conf = (0, _rc2.default)('broil', {});
 
-  name = name || conf._[1];
-  repo = repo || conf._[2];
-
   (0, _git.checkGit)();
 
   if (!conf.config) {

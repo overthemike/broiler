@@ -6,9 +6,6 @@ import jsonfile from 'jsonfile'
 export default function save (name, repo, cb) {
   let conf = rc('broil', {})
 
-  name = name || conf._[1]
-  repo = repo || conf._[2] 
-
   checkGit()
 
   if (!conf.config) {

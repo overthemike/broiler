@@ -41,6 +41,7 @@ export function validateGitRepo(repo, cb) {
   spinner.setSpinnerString(19)
   spinner.start()
   exec(`git ls-remote ${repo}`, { silent: true }, function(code) {
+    console.log('code', code)
     spinner.stop(true)
     if (code !== 0) { // invalid repo - https://git-scm.com/docs/git-ls-remote.html (--exit-code)
       throw new Error(error("The github repo you entered is either invalid or unavailable"))

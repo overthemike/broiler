@@ -11,38 +11,25 @@ yargs
 
 // Install command
 .command(
-  'install', // command
-  'broiler install <repo> [<location>]', // description
-  function (yargs) {
-    install(yargs.argv._[1], yargs.argv._[2]);
-  }
-)
-.command(
-  'i', 
-  'alias for install',
-  function (yargs) {
-    install(yargs.argv._[1], yargs.argv._[2])
+  'install <repo> [location]', // command
+  'Install a boilerplate', // description
+  function ({repo, location}) {
+    install(repo, location);
   }
 )
 
 // Save command
 .command(
-  'save', 
-  'broiler save <name> <repo>',
-  function (yargs) {
-    save()
-  }
-)
-.command(
-  's', 
-  'alias for save',
-  function (yargs) {
-    save()
+  'save <name> <repo>', 
+  'Save a boilerplate as an alias to use later',
+  function ({ name, repo }) {
+    save(name, repo)
   }
 )
 
 // errors
 .fail(function(msg, err){
+  console.log('\n', msg, err)
   if (/Unknown argument/.test(msg)){
     let list = ['install', 'save'];
     let command = msg.split(": ")[1].split(", ")[0];
